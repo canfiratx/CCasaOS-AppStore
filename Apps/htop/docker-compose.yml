@@ -1,0 +1,25 @@
+services:
+  htop:
+    image: anapsix/htop:latest
+    container_name: htop
+    restart: unless-stopped
+    x-casaos:
+      architectures:
+        - amd64
+        - arm
+        - arm64
+      main: htop
+      description:
+        en_us: A simple, terminal-based system monitoring tool.
+        tr_tr: Basit, terminal tabanlı bir sistem izleme aracı.
+      tagline:
+        en_us: Interactive Process Viewer
+        tr_tr: Etkileşimli İşlem Görüntüleyici
+      developer: "anapsix"
+      author: "CasaOS Community"
+      icon: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/htop.png"
+      thumbnail: ""
+      title:
+        en_us: htop
+      category: "Utilities"
+      port_map: ""

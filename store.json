@@ -1,0 +1,9 @@
+{
+    "manifest": {
+      "name": "Can's App Store",
+      "description": "Can Fırat'ın kişisel CasaOS uygulama mağazası.",
+      "icon": "https://img.icons8.com/fluency/48/package.png",
+      "author": "canfiratx",
+      "version": "1.0.0"
+    }
+}
