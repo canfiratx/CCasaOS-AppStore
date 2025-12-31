@@ -9,8 +9,8 @@ services:
         condition: service_healthy
     environment:
       NODE_ENV: production
-      NEXTAUTH_URL: http://localhost:1111
-      NEXT_PUBLIC_BASE_URL: http://localhost:1111
+      NEXTAUTH_URL: http://192.168.68.108:1111
+      NEXT_PUBLIC_BASE_URL: http://192.168.68.108:1111
       NEXTAUTH_SECRET: a-very-secret-and-long-string-for-casaos
       DATABASE_URL: postgresql://postgres:mysecretpassword@blinko-db:5432/postgres
     ports:
