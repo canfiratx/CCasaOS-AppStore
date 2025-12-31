@@ -1,0 +1,33 @@
+name: glance
+services:
+  glance:
+    image: glanceapp/glance:latest
+    container_name: glance
+    restart: unless-stopped
+    ports:
+      - target: 8080
+        published: "8080"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/glance/config
+        target: /app/config
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: glance
+  author: "canfiratx"
+  category: "Dashboard"
+  description:
+    en_us: A self-hosted dashboard that puts all your services in one place.
+    tr_tr: Tüm servislerinizi tek bir yerde toplayan, kendi kendine barındırılan bir dashboard.
+  developer: "glanceapp"
+  icon: "https://raw.githubusercontent.com/glanceapp/glance/main/assets/logo.png"
+  tagline:
+    en_us: All your services in one place.
+    tr_tr: Tüm servisleriniz tek bir yerde.
+  title:
+    en_us: Glance
+  port_map: "8080"
