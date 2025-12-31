@@ -1,3 +1,4 @@
+name: blinko
 services:
   blinko:
     image: blinkospace/blinko:latest
@@ -15,26 +16,9 @@ services:
     ports:
       - "1111:1111"
     volumes:
-      - /DATA/AppData/blinko/data:/app/.blinko
-    x-casaos:
-      architectures:
-        - amd64
-        - arm64
-      main: blinko
-      description:
-        en_us: Blinko is a self-hostable, open-source, and end-to-end encrypted note-taking/journaling application.
-        tr_tr: Blinko, kendi sunucunuzda barındırabileceğiniz, açık kaynaklı ve uçtan uca şifreli bir not alma/günlük tutma uygulamasıdır.
-      tagline:
-        en_us: Self-hostable, open-source, E2E encrypted note-taking app.
-        tr_tr: Kendi kendine barındırılan, açık kaynaklı, E2EE not alma uygulaması.
-      developer: "blinkospace"
-      author: "canfiratx"
-      icon: "https://raw.githubusercontent.com/blinkospace/blinko/main/public/logo-blinko.png"
-      thumbnail: ""
-      title:
-        en_us: Blinko
-      category: "Productivity"
-      port_map: "1111"
+      - type: bind
+        source: /DATA/AppData/blinko/data
+        target: /app/.blinko
 
   blinko-db:
     image: postgres:14
@@ -45,9 +29,30 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: mysecretpassword
     volumes:
-      - /DATA/AppData/blinko/postgres:/var/lib/postgresql/data
+      - type: bind
+        source: /DATA/AppData/blinko/postgres
+        target: /var/lib/postgresql/data
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres", "-d", "postgres"]
       interval: 5s
       timeout: 10s
       retries: 5
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: blinko
+  author: "canfiratx"
+  category: "Productivity"
+  description:
+    en_us: Blinko is a self-hostable, open-source, and end-to-end encrypted note-taking/journaling application.
+    tr_tr: Blinko, kendi sunucunuzda barındırabileceğiniz, açık kaynaklı ve uçtan uca şifreli bir not alma/günlük tutma uygulamasıdır.
+  developer: "blinkospace"
+  icon: "https://raw.githubusercontent.com/blinkospace/blinko/main/public/logo-blinko.png"
+  tagline:
+    en_us: Self-hostable, open-source, E2E encrypted note-taking app.
+    tr_tr: Kendi kendine barındırılan, açık kaynaklı, E2EE not alma uygulaması.
+  title:
+    en_us: Blinko
+  port_map: "1111"
