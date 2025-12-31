@@ -1,17 +1,17 @@
 services:
   blinko:
     image: blinkospace/blinko:latest
-    container_name: blinko-website
+    container_name: blinko
     restart: always
     depends_on:
-      postgres:
+      blinko-db:
         condition: service_healthy
     environment:
       NODE_ENV: production
       NEXTAUTH_URL: http://localhost:1111
       NEXT_PUBLIC_BASE_URL: http://localhost:1111
       NEXTAUTH_SECRET: a-very-secret-and-long-string-for-casaos
-      DATABASE_URL: postgresql://postgres:mysecretpassword@postgres:5432/postgres
+      DATABASE_URL: postgresql://postgres:mysecretpassword@blinko-db:5432/postgres
     ports:
       - "1111:1111"
     volumes:
@@ -36,9 +36,9 @@ services:
       category: "Productivity"
       port_map: "1111"
 
-  postgres:
+  blinko-db:
     image: postgres:14
-    container_name: blinko-postgres
+    container_name: blinko-db
     restart: always
     environment:
       POSTGRES_DB: postgres
