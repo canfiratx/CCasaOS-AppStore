@@ -14,7 +14,9 @@ services:
       NEXTAUTH_SECRET: a-very-secret-and-long-string-for-casaos
       DATABASE_URL: postgresql://postgres:mysecretpassword@blinko-db:5432/postgres
     ports:
-      - "1111:1111"
+      - target: 1111
+        published: "1111"
+        protocol: tcp
     volumes:
       - type: bind
         source: /DATA/AppData/blinko/data
