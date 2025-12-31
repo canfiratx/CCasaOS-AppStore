@@ -5,11 +5,18 @@ services:
     restart: always
     ports:
       - "1111:1111"
+    depends_on:
+      - blinko-db
+    environment:
+      DATABASE_URL: postgresql://postgres:mysecretpassword@blinko-db:5432/postgres
+      NEXTAUTH_SECRET: a-very-secret-and-long-string-for-casaos
     x-casaos:
       architectures:
         - amd64
         - arm64
       main: blinko
+      title:
+        en_us: Blinko (Test)
       description:
         en_us: Blinko is a self-hostable, open-source, and end-to-end encrypted note-taking/journaling application.
         tr_tr: Blinko, kendi sunucunuzda barındırabileceğiniz, açık kaynaklı ve uçtan uca şifreli bir not alma/günlük tutma uygulamasıdır.
@@ -19,8 +26,13 @@ services:
       developer: "blinkospace"
       author: "canfiratx"
       icon: "https://raw.githubusercontent.com/blinkospace/blinko/main/public/logo-blinko.png"
-      thumbnail: ""
-      title:
-        en_us: Blinko
       category: "Productivity"
       port_map: "1111"
+
+  blinko-db:
+    image: postgres:14
+    container_name: blinko-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
