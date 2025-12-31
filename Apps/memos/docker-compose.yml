@@ -1,0 +1,34 @@
+name: memos
+services:
+  memos:
+    image: neosmemo/memos:0.25
+    container_name: memos
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/memos/memos
+        target: /var/opt/memos
+    ports:
+      - target: 5230
+        published: "5230"
+        protocol: tcp
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+    - arm
+  main: memos
+  author: "canfiratx"
+  category: "Productivity"
+  description:
+    en_us: A lightweight, open-source, self-hosted note-taking application.
+    tr_tr: Hafif, açık kaynaklı, kendi sunucunuzda barındırabileceğiniz bir not alma uygulaması.
+  developer: "usememos"
+  icon: "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Memos/icon.png"
+  tagline:
+    en_us: A lightweight, self-hosted memo hub.
+    tr_tr: Hafif, kendi kendine barındırılan bir not merkezi.
+  title:
+    en_us: Memos
+  port_map: "5230"
