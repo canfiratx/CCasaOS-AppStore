@@ -34,3 +34,8 @@ x-casaos:
   title:
     en_us: Glance
   port_map: "8080"
+  ports:
+    - container: "8080"
+      description:
+        en_us: "WebUI Port"
+        tr_tr: "Web Arayüzü Portu"
